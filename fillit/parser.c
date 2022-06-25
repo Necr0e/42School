@@ -6,7 +6,7 @@
 /*   By: lharkala <lharkala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:54:41 by lharkala          #+#    #+#             */
-/*   Updated: 2022/04/27 00:12:34 by lharkala         ###   ########.fr       */
+/*   Updated: 2022/06/19 22:10:18 by lharkala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_etris	*new_piece(char *s, char value)
 	int			block;
 
 	if ((charcount(s) < 0 || !connectioncount(s)))
-		return (fail);
+		return (NULL);
 	piece = (t_etris *)malloc(sizeof(t_etris));
 	piece->value = value;
 	piece->next = NULL;
@@ -88,7 +88,7 @@ static int	new_list(t_etris **tlist, char *s, int len, char value)
 	{
 		new = new_piece(s + i, value++);
 		if (!new)
-			return (fail);
+			return (0);
 		else
 		{
 			if (i == 0)
@@ -108,16 +108,16 @@ static int	new_list(t_etris **tlist, char *s, int len, char value)
 
 int	parse_pieces(char *fname, t_etris **tlist)
 {
-	char	buff[545];
+	char	buff[546];
 	int		ret;
 	int		fd;
 	char	value;
 
 	value = 'A';
 	fd = open(fname, 00);
-	ret = read(fd, buff, 545);
+	ret = read(fd, buff, 546);
 	close(fd);
-	if ((ret > 544 || ret < 19) || (ret - 20) % 21 != 0)
+	if (ret > 545 || ret < 20 || (ret - 20) % 21 != 0)
 		return (fail);
 	return (new_list(tlist, buff, ret, value));
 }
