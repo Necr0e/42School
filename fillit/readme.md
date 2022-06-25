@@ -13,15 +13,18 @@ an issue if you run into any.
 ## Usage
 `./fillit [file]`
 
+File format:
+
+.##.
+.##.
+....
+....
+
 Example:
 ```
 ~ ./fillit samples/test_8
 
-.AABB..
-AACCB..
-.CC.BDD
-.EE.DD.
-EEFFGG.
-.FFGGHH
-....HH.
-```
+.AA.
+.AA.
+....
+....
